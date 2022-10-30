@@ -1,10 +1,13 @@
 const router = require("express").Router();
 
 // import module
+const checkUser = require("../middlewares/checkUser");
 
 const Todo = require("../models/todoPostSchema");
 
-router.get("/", async (req, res, next) => {
+router.get("/", checkUser, async (req, res, next) => {
+  console.log("verified user", req.user);
+
   try {
     const todos = await Todo.find();
 
